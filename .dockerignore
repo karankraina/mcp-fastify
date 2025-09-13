@@ -1,0 +1,70 @@
+# Dependencies
+node_modules
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Source files (we copy built files instead)
+src
+tests
+*.test.ts
+*.test.js
+
+# Build tools and configs
+.git
+.gitignore
+tsconfig.json
+.eslintrc.*
+.prettierrc.*
+jest.config.*
+tap.config.*
+
+# Environment files
+.env
+.env.*
+!.env.example
+
+# Documentation
+README.md
+CONTRIBUTING.md
+docs/
+
+# Coverage and test outputs
+coverage
+.nyc_output
+.tap
+
+# IDE and editor files
+.vscode
+.idea
+*.swp
+*.swo
+*~
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Logs
+logs
+*.log
+
+# Docker files
+Dockerfile
+.dockerignore
+docker-compose*.yml
+
+# CI/CD
+.github
+.gitlab-ci.yml
+.travis.yml
+.circleci
+
+# Temporary files
+*.tmp
+*.temp
