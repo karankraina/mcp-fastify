@@ -54,8 +54,6 @@ export function registerDivideNumbersTool(server: McpServer) {
                     }]
                 };
             } catch (error: unknown) {
-                console.error('Error while dividing numbers:', error);
-                
                 if (error instanceof Error) {
                     return {
                         content: [{
