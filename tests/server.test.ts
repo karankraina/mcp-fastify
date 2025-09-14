@@ -1,5 +1,6 @@
 import { test } from 'tap';
 import { build, createMCPPayload, parseSSEResponse, initializeSession, createToolCallPayload, createInitializePayload } from './helper.js';
+import { isMCPErrorResponse, MCPResponse } from './types.js';
 
 test('server should return error for invalid session ID', async (t) => {
   const app = await build(t);
@@ -19,8 +20,8 @@ test('server should return error for invalid session ID', async (t) => {
   });
   
   t.equal(response.statusCode, 200, 'Should return 200');
-  const result = parseSSEResponse(response.body);
-  t.ok(result.error, 'Should return error for invalid session');
+  const result = parseSSEResponse<MCPResponse>(response.body);
+  t.ok(isMCPErrorResponse(result), 'Should return error for invalid session');
 });
 
 test('server should return error for request without session ID and not initialize', async (t) => {

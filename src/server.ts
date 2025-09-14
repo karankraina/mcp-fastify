@@ -15,12 +15,12 @@ const envToLogger = {
       },
     },
   },
-  production: false,
+  production: true,
   test: false,
 };
 
 const environment = process.env.ENVIRONMENT || "production";
-
+ 
 export function createServer(): FastifyInstance {
   const server = fastify({
     logger: envToLogger[environment as keyof typeof envToLogger] ?? true,
@@ -104,7 +104,7 @@ export function createServer(): FastifyInstance {
   server.get("/mcp", handleSessionRequest);
   server.delete("/mcp", handleSessionRequest);
 
-  server.get("/health", async (request, reply) => {
+  server.get("/health", () => {
     return { 
       status: "ok", 
       timestamp: new Date().toISOString(),

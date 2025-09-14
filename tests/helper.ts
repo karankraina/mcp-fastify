@@ -16,7 +16,7 @@ export async function build(t: Test): Promise<FastifyInstance> {
 }
 
 
-export function createMCPPayload(method: string, params?: any, id: number = 1) {
+export function createMCPPayload(method: string, params?: Record<string, unknown>, id: number = 1) {
   return {
     jsonrpc: '2.0' as const,
     id,
@@ -43,7 +43,7 @@ export function createInitializePayload(id: number = 1) {
 }
 
 
-export function createToolCallPayload(toolName: string, args: any, id: number = 1) {
+export function createToolCallPayload(toolName: string, args: Record<string, unknown>, id: number = 1) {
   return createMCPPayload('tools/call', {
     name: toolName,
     arguments: args
@@ -68,12 +68,12 @@ export async function initializeSession(app: FastifyInstance): Promise<string | 
     return null;
   }
   
-  const result = parseSSEResponse(response.body);
+  parseSSEResponse(response.body);
   
   return response.headers['mcp-session-id'] as string || null;
 }
 
-export function parseSSEResponse(body: string): any {
+export function parseSSEResponse<T = Record<string, unknown>>(body: string): T {
   if (body.startsWith('event:') || body.includes('data:')) {
     const lines = body.split('\n');
     let jsonData = '';
