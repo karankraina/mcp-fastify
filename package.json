@@ -10,12 +10,14 @@
   "scripts": {
     "build": "tsc && chmod 755 build/src/index.js",
     "start": "node build/src/index.js",
-    "dev": "npm run build && npm start",
+    "dev": "concurrently \"tsc --watch\" \"nodemon --watch build build/src/index.js\"",
     "test": "npm run build && tap --allow-incomplete-coverage 'build/tests/**/*.test.js'",
     "test:watch": "tap --watch 'build/tests/**/*.test.js'",
     "test:coverage": "npm run build && tap --coverage-report=text 'build/tests/**/*.test.js'",
     "clean": "rm -rf build",
-    "lint": "tsc --noEmit",
+    "lint:tsc": "tsc --noEmit",
+    "lint:eslint": "eslint .",
+    "lint": "npm run lint:tsc && npm run lint:eslint",
     "prepack": "npm run clean && npm run build"
   },
   "files": [
@@ -62,9 +64,14 @@
     "zod": "^3.25.64"
   },
   "devDependencies": {
+    "@eslint/js": "^9.35.0",
     "@types/node": "^24.0.1",
     "@types/tap": "^15.0.11",
+    "concurrently": "^8.2.2",
+    "eslint": "^9.35.0",
+    "nodemon": "^3.0.2",
     "tap": "^21.0.1",
-    "typescript": "^5.8.3"
+    "typescript": "^5.9.2",
+    "typescript-eslint": "^8.43.0"
   }
 }
