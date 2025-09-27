@@ -1,0 +1,77 @@
+{
+  "name": "mcp-fastify",
+  "version": "1.0.0",
+  "description": "A robust template for building Model Context Protocol (MCP) servers using Node.js and the Fastify framework",
+  "main": "build/src/index.js",
+  "type": "module",
+  "bin": {
+    "mcp-fastify": "./build/src/index.js"
+  },
+  "scripts": {
+    "build": "tsc && chmod 755 build/src/index.js",
+    "start": "node build/src/index.js",
+    "dev": "concurrently \"tsc --watch\" \"nodemon --watch build build/src/index.js\"",
+    "test": "npm run build && tap --allow-incomplete-coverage 'build/tests/**/*.test.js'",
+    "test:watch": "tap --watch 'build/tests/**/*.test.js'",
+    "test:coverage": "npm run build && tap --coverage-report=text 'build/tests/**/*.test.js'",
+    "clean": "rm -rf build",
+    "lint:tsc": "tsc --noEmit",
+    "lint:eslint": "eslint .",
+    "lint": "npm run lint:tsc && npm run lint:eslint",
+    "prepack": "npm run clean && npm run build"
+  },
+  "files": [
+    "build",
+    "src",
+    "README.md",
+    "LICENSE",
+    "sample.env"
+  ],
+  "keywords": [
+    "mcp",
+    "model-context-protocol",
+    "fastify",
+    "nodejs",
+    "typescript",
+    "server",
+    "template",
+    "ai",
+    "anthropic",
+    "tools"
+  ],
+  "author": {
+    "name": "Karan Raina",
+    "email": "karanraina1996@gmail.com",
+    "url": "https://github.com/karankraina"
+  },
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/karankraina/mcp-fastify.git"
+  },
+  "bugs": {
+    "url": "https://github.com/karankraina/mcp-fastify/issues"
+  },
+  "homepage": "https://github.com/karankraina/mcp-fastify#readme",
+  "engines": {
+    "node": ">=22.0.0",
+    "npm": ">=8.0.0"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.17.5",
+    "fastify": "^5.6.0",
+    "pino-pretty": "^13.1.1",
+    "zod": "^3.25.64"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.35.0",
+    "@types/node": "^24.0.1",
+    "@types/tap": "^15.0.11",
+    "concurrently": "^8.2.2",
+    "eslint": "^9.35.0",
+    "nodemon": "^3.0.2",
+    "tap": "^21.0.1",
+    "typescript": "^5.9.2",
+    "typescript-eslint": "^8.43.0"
+  }
+}
